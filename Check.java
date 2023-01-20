@@ -16,7 +16,7 @@ public class Check{
 
         try(PrintWriter pw = new PrintWriter(check)){
             pw.println("Check #1 - " + functional.getNAME_CARD() + " " + functional.getSURNAME_CARD());
-            pw.println(getBalanc());
+            pw.println(functional.getBalanc());
             pw.println(sdf.format(date));
         }catch (IOException e){
             e.printStackTrace();
