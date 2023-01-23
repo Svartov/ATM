@@ -7,17 +7,16 @@ import java.io.*;
 public class Check{
     Scanner in = new Scanner(System.in);
 
-    static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    static Date date = new Date();
-    static Functional functional = new Functional();
-    static File check = new File("check.txt");
+     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); // Create a form for the date
+     Date date = new Date(); // Create date object
+     File check = new File("check.txt"); // Specify in which file we will output the receipt
 
-    public static void printCheckBalanc(){
-
+    protected void printCheckBalanc(Functional functional){
         try(PrintWriter pw = new PrintWriter(check)){
-            pw.println("Check #1 - " + functional.getNAME_CARD() + " " + functional.getSURNAME_CARD());
-            pw.println(functional.getBalanc());
-            pw.println(sdf.format(date));
+            pw.println("Name: " + functional.getNAME_CARD() + " " + "Surname: " + functional.getSURNAME_CARD()
+                    + "" + "Account number: " + functional.getACCOUNT_NUMBER()); // Specify the user's personal data
+            pw.println("Balance: " + functional.getBalanc() + "EUR"); // Specify the balance
+            pw.println("Date: " + sdf.format(date)); // Specify the date
         }catch (IOException e){
             e.printStackTrace();
         }

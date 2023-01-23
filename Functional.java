@@ -5,10 +5,11 @@ import java.util.Scanner;
 public class Functional extends Card {
     Scanner in = new Scanner(System.in);
 
-    private int examinationPinCod; // Проверка на пинкод
+
+    private int examinationPinCod; //  PIN code check
     private double sumEdit;
 
-    protected void setExaminationPinCod(int examinationPinCod) { // Проверка на пинкод
+    protected void setExaminationPinCod(int examinationPinCod) { // PIN code check
         this.examinationPinCod = examinationPinCod;
     }
 
@@ -21,7 +22,7 @@ public class Functional extends Card {
         return sumEdit;
     }
 
-    protected boolean checkPinCode(){ // Проверка на пинкод
+    protected boolean checkPinCode(){ // PIN code check
         if(examinationPinCod == getPIN_CODE()){
            System.out.println("Complete\n" + "ACCOUNT NUMBER: " + getACCOUNT_NUMBER() + "\n");
            return true;
@@ -31,63 +32,26 @@ public class Functional extends Card {
         }
     }
 
-    protected void checkBalanc(){  // Проврка баланса
-        System.out.println( "\n" + "Hei " + getNAME_CARD() + " " + getSURNAME_CARD() + " your balanc = " + getBalanc() + "EUR");
-        Check.printCheckBalanc();
+    protected void checkBalanc(){  // Balance check
+        System.out.println( "\n" + "Hei " + getNAME_CARD() + " " + getSURNAME_CARD() + " your balance = " + getBalanc() + "EUR");
     }
 
-    protected void addBalanc(double enterSum){ // Добавить средства
+    protected void addBalanc(double enterSum){ // Top up balance
         if (enterSum > 0) {
             setBalanc(setSumEdit(getBalanc() + enterSum));
-            System.out.println("\n" + "Balanc = " + getBalanc() + "EUR");
-            Check.printCheckBalanc();
+            System.out.println("\n" + "Balance = " + getBalanc() + "EUR");
         }else {
             System.out.println("Error! The amount must be greater than 0!");
         }
     }
 
-    protected void withdrawCash(double enterSum){ // снят средства
+    protected void withdrawCash(double enterSum){ // Withdraw money from balance
         sumEdit = getBalanc() - enterSum;
         if(getBalanc() > enterSum && getBalanc() > 0 && enterSum > 0){
             setBalanc(sumEdit);
-            System.out.println("\n" + "Balanc = " +getBalanc() + "EUR");
-            Check.printCheckBalanc();
+            System.out.println("\n" + "Balance = " +getBalanc() + "EUR");
         }else {
             System.out.println("Error! Balance less than this amount!");
-        }
-    }
-
-    public  void menu(int numberD, double sum, Functional functional) {
-        Scanner in = new Scanner(System.in);
-        for (; ; ) {
-            System.out.println("1- Проверить баланс");
-            System.out.println("2- Пополнить баланс");
-            System.out.println("3- Снять деньги с баланса");
-            System.out.println("4- Выйти");
-            System.out.print("Что вы хотите сделать?: ");
-            numberD = in.nextInt();
-
-            switch (numberD) {
-                case (1):
-                    functional.checkBalanc();
-                    break;
-                case (2):
-                    System.out.print("Enter sum:");
-                    sum = in.nextDouble();
-                    functional.addBalanc(sum);
-                    break;
-                case (3):
-                    System.out.print("Enter sum:");
-                    sum = in.nextDouble();
-                    functional.withdrawCash(sum);
-                    break;
-                case (4):
-                    System.out.println("See you!");
-                    System.exit(1);
-                default:
-                    System.out.println("Wrong number selected");
-            }
-            System.out.println();
         }
     }
 }
